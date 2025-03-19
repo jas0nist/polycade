@@ -54,7 +54,7 @@ def save_json(file_path, data):
 def update_game_controllers(games_data, controllers_data):
     """Update game controllers in the games data."""
     games_metadata = games_data.get('gamesMetadata', {})
-    for game_key, game_data in games_metadata.items():
+    for game_data in games_metadata.items():
         title = game_data.get('title', 'No Title')
         matching_controller = next((c for c in controllers_data if c['title'] == title), None)
         if matching_controller:

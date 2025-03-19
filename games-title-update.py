@@ -56,7 +56,7 @@ def update_game_names(games_data, names_data):
     games_metadata = games_data.get('gamesMetadata', {})
     game_suids_data = games_data.get('gameSUIDsData', {})
 
-    for game_id, game_data in games_metadata.items():
+    for game_data in games_metadata.items():
         original_title = game_data.get('title', 'No Title')
         for name_entry in names_data:
             origin_title = name_entry.get('origin-title', 'No Title')
