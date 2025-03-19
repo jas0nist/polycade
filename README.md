@@ -9,8 +9,8 @@ A versatile script for managing and interacting with functionalities related to 
 #### Command Line Options:
 
 - `-h, --help`: Display the help message and exit.
-- `--backup-titles`: Create a secure backup of all game titles.
 - `--backup-controllers`: Save all game controller configurations to a backup file.
+- `--backup-titles`: Create a secure backup of all game titles.
 - `--restore-controllers`: Restore game controller configurations from a backup file.
 - `--update-titles`: Update game titles with the latest information.
 

@@ -46,14 +46,14 @@ def parse_arguments():
         description="Perform backup, restore, and update operations for game titles and controllers."
     )
     parser.add_argument(
-        "--backup-titles",
-        action="store_true",
-        help="Backup all game titles to a secure location."
-    )
-    parser.add_argument(
         "--backup-controllers",
         action="store_true",
         help="Backup all game controller configurations."
+    )
+    parser.add_argument(
+        "--backup-titles",
+        action="store_true",
+        help="Backup all game titles to a secure location."
     )
     parser.add_argument(
         "--restore-controllers",
