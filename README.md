@@ -10,11 +10,11 @@ Command Line Options:
 
 The following command line options are available for `games-wrapper.py`:
 
-`-h, --help`: Show this help message and exit.
-`--backup-titles`: Backup all game titles to a secure location.
-`--backup-controllers`: Backup all game controller configurations.
-`--restore-controllers`: Restore game controller configurations from a backup.
-`--update-titles`: Update game titles with the latest information.
+- `-h, --help`: Show this help message and exit.
+- `--backup-titles`: Backup all game titles to a secure location.
+- `--backup-controllers`: Backup all game controller configurations.
+- `--restore-controllers`: Restore game controller configurations from a backup.
+- `--update-titles`: Update game titles with the latest information.
 
 ---
 
