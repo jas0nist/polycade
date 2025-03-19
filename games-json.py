@@ -19,7 +19,7 @@ def backup_game_controllers():
 def restore_game_controllers():
     """Restore functionality for game controllers."""
     print("Restoring game controllers...")
-    # Code from games-controller-restore.py
+    subprocess.run(["python", "./games-controller-restore.py"], check=True)
     pass
 
 def update_game_titles():
