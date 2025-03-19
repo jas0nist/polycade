@@ -4,10 +4,10 @@ import logging
 import os
 from typing import Any, Dict, List
 
-# Configure logging
+"""Configure logging"""
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# Path to the JSON file
+"""Path to the JSON file"""
 GAMES_FILE_PATH = './games.json'
 TITLES_FILE_PATH = './game-titles.json'
 

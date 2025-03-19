@@ -5,13 +5,13 @@ import shutil
 import os
 from datetime import datetime
 
-# Configure logging
+"""Configure logging"""
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# Paths to the JSON files
+"""Path to the JSON file"""
 GAMES_FILE_PATH = './games.json'
 TITLES_FILE_PATH = './game-titles.json'
-# Generate a unique backup file name with a timestamp
+"""Generate a unique backup file name with a timestamp"""
 GAMES_BACKUP_PATH = f'./games-backup-title-{datetime.now().strftime("%Y%m%d%H%M%S")}.json'
 
 def backup_file(original_path, backup_path):
@@ -80,21 +80,21 @@ def update_game_names(games_data, names_data):
 def main():
     """Main function to load, update, and save game data."""
     try:
-        # Check if the games file exists and create a backup
+        """Check if the games file exists and create a backup"""
         if os.path.exists(GAMES_FILE_PATH):
             backup_file(GAMES_FILE_PATH, GAMES_BACKUP_PATH)
         else:
             logging.error(f"Games file not found: {GAMES_FILE_PATH}")
             return
 
-        # Load JSON data
+        """Load JSON data"""
         names_data = load_json(TITLES_FILE_PATH)
         games_data = load_json(GAMES_FILE_PATH)
 
-        # Update game names
+        """Update game names"""
         update_game_names(games_data, names_data)
 
-        # Save the updated games data
+        """Save the updated games data"""
         save_json(GAMES_FILE_PATH, games_data)
         logging.info(f"Updated games data successfully written to {GAMES_FILE_PATH}")
     except Exception as e:
