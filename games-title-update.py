@@ -3,7 +3,7 @@ import json
 import logging
 import shutil
 import os
-import datetime
+from datetime import datetime
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -12,8 +12,7 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 GAMES_FILE_PATH = './games.json'
 TITLES_FILE_PATH = './game-titles.json'
 # Generate a unique backup file name with a timestamp
-timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
-GAMES_BACKUP_PATH = f'./games-backup-{timestamp}.json'
+GAMES_BACKUP_PATH = f'./games-backup-title-{datetime.now().strftime("%Y%m%d%H%M%S")}.json'
 
 def backup_file(original_path, backup_path):
     """Create a backup of the original file."""
@@ -29,14 +28,12 @@ def backup_file(original_path, backup_path):
 
 def load_json(file_path):
     """Load JSON data from a file."""
+    if not os.path.exists(file_path):
+        logging.error(f"File not found: {file_path}")
+        raise FileNotFoundError(f"File not found: {file_path}")
     try:
         with open(file_path, 'r') as file:
-            data = json.load(file)
-            logging.debug(f"Loaded JSON data from {file_path}")
-            return data
-    except FileNotFoundError:
-        logging.error(f"File not found: {file_path}")
-        raise
+            return json.load(file)
     except json.JSONDecodeError as e:
         logging.error(f"Invalid JSON format in {file_path}: {e}")
         raise

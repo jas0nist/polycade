@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 GAMES_FILE_PATH = './games.json'
 CONTROLLERS_FILE_PATH = './game-controllers.json'
 # Generate a unique backup file name with a timestamp
-GAMES_BACKUP_PATH = f'./games-backup-{datetime.now().strftime("%Y%m%d%H%M%S")}.json'
+GAMES_BACKUP_PATH = f'./games-backup-controller-{datetime.now().strftime("%Y%m%d%H%M%S")}.json'
 
 def backup_file(original_path, backup_path):
     """Create a backup of the original file."""
@@ -75,19 +75,25 @@ def update_game_controllers(games_data, controllers_data):
 def main():
     """Main function to load, update, and save game data."""
     try:
-        # Create a backup of the original games.json file
+        # Check if the games file exists and create a backup
         if os.path.exists(GAMES_FILE_PATH):
             backup_file(GAMES_FILE_PATH, GAMES_BACKUP_PATH)
+        else:
+            logging.error(f"Games file not found: {GAMES_FILE_PATH}")
+            return
 
+        # Load JSON data
         controllers_data = load_json(CONTROLLERS_FILE_PATH)
         games_data = load_json(GAMES_FILE_PATH)
 
+        # Restore controller types
         update_game_controllers(games_data, controllers_data)
 
+        # Save the updated games data
         save_json(GAMES_FILE_PATH, games_data)
         logging.info(f"Updated games data written to {GAMES_FILE_PATH}")
     except Exception as e:
-        logging.error(f"An error occurred: {e}")
+        logging.error(f"An error occurred during execution: {e}")
 
 if __name__ == '__main__':
     main()
