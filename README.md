@@ -8,7 +8,7 @@ This script serves as a wrapper for managing and interacting with `Polycade AGS 
 
 Command Line Options:
 
-The following command line options are available for `games-wrapper.py`:
+The following command line options are available for `games-json.py`:
 
 - `-h, --help`: Show this help message and exit.
 - `--backup-titles`: Backup all game titles to a secure location.
