@@ -3,20 +3,22 @@ import json
 import logging
 import shutil
 import os
-import datetime
+from datetime import datetime
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# Path to the JSON files
+# Paths to the JSON files
 GAMES_FILE_PATH = './games.json'
 CONTROLLERS_FILE_PATH = './game-controllers.json'
 # Generate a unique backup file name with a timestamp
-timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
-GAMES_BACKUP_PATH = f'./games-backup-{timestamp}.json'
+GAMES_BACKUP_PATH = f'./games-backup-{datetime.now().strftime("%Y%m%d%H%M%S")}.json'
 
 def backup_file(original_path, backup_path):
     """Create a backup of the original file."""
+    if not os.path.exists(original_path):
+        logging.warning(f"File not found for backup: {original_path}")
+        return
     try:
         shutil.copy(original_path, backup_path)
         logging.info(f"Backup created: {backup_path}")
@@ -26,9 +28,15 @@ def backup_file(original_path, backup_path):
 
 def load_json(file_path):
     """Load JSON data from a file."""
+    if not os.path.exists(file_path):
+        logging.error(f"File not found: {file_path}")
+        raise FileNotFoundError(f"File not found: {file_path}")
     try:
         with open(file_path, 'r') as file:
             return json.load(file)
+    except json.JSONDecodeError as e:
+        logging.error(f"Invalid JSON format in {file_path}: {e}")
+        raise
     except Exception as e:
         logging.error(f"Failed to load JSON from {file_path}: {e}")
         raise
@@ -38,28 +46,31 @@ def save_json(file_path, data):
     try:
         with open(file_path, 'w') as file:
             json.dump(data, file, indent=4)
+        logging.info(f"Data successfully saved to {file_path}")
     except Exception as e:
         logging.error(f"Failed to save JSON to {file_path}: {e}")
         raise
 
 def update_game_controllers(games_data, controllers_data):
     """Update game controllers in the games data."""
-    for game_key, game_data in games_data.get('gamesMetadata', {}).items():
+    games_metadata = games_data.get('gamesMetadata', {})
+    for game_key, game_data in games_metadata.items():
         title = game_data.get('title', 'No Title')
-        for controller in controllers_data:
-            if controller['title'] == title:
-                tags = game_data.setdefault('tags', [])
-                if not any('Controller Type' in tag.get('name', '') for tag in tags):
-                    tags.append({
-                        "id": controller.get('id', 'No ID'),
-                        "icon": controller.get('icon', 'No Icon'),
-                        "name": controller.get('name', 'No Name'),
-                        "packages": controller.get('packages', [])
-                    })
-                    logging.debug(f"Added controller data to game: {title}")
-                else:
-                    logging.debug(f"Game already has controller data: {title}")
-                break
+        matching_controller = next((c for c in controllers_data if c['title'] == title), None)
+        if matching_controller:
+            tags = game_data.setdefault('tags', [])
+            if not any('Controller Type' in tag.get('name', '') for tag in tags):
+                tags.append({
+                    "id": matching_controller.get('id', 'No ID'),
+                    "icon": matching_controller.get('icon', 'No Icon'),
+                    "name": matching_controller.get('name', 'No Name'),
+                    "packages": matching_controller.get('packages', [])
+                })
+                logging.debug(f"Added controller data to game: {title}")
+            else:
+                logging.debug(f"Game already has controller data: {title}")
+        else:
+            logging.debug(f"No matching controller found for game: {title}")
 
 def main():
     """Main function to load, update, and save game data."""

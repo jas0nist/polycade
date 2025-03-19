@@ -1,46 +1,41 @@
-# Maintain Polycade AGS `games.json` manual edits
+# Managing Polycade AGS `games.json` Manual Edits
 
-## Script Descriptions
+## Overview of Scripts
 
 ### `games-json.py`
 
-This script serves as a wrapper for managing and interacting with `Polycade AGS games.json` related functionalities.
+A versatile script for managing and interacting with functionalities related to the `Polycade AGS games.json` file.
 
-Command Line Options:
+#### Command Line Options:
 
-The following command line options are available for `games-json.py`:
-
-- `-h, --help`: Show this help message and exit.
-- `--backup-titles`: Backup all game titles to a secure location.
-- `--backup-controllers`: Backup all game controller configurations.
-- `--restore-controllers`: Restore game controller configurations from a backup.
+- `-h, --help`: Display the help message and exit.
+- `--backup-titles`: Create a secure backup of all game titles.
+- `--backup-controllers`: Save all game controller configurations to a backup file.
+- `--restore-controllers`: Restore game controller configurations from a backup file.
 - `--update-titles`: Update game titles with the latest information.
 
 ---
 
 ### `games-controller-backup.py`
-This script is designed to analyze and back up the controller configurations listed in the `Polycade AGS games.json` file. It extracts the controller data and generates a separate `game-controllers.json` file to ensure the configurations are preserved for future use.
+
+This script extracts and backs up controller configurations from the `Polycade AGS games.json` file. The configurations are saved in a separate `game-controllers.json` file, ensuring they are preserved for future use.
 
 ---
 
 ### `games-controller-restore.py`
-This script restores custom controller configurations in `Polycade AGS games.json` using the data stored in `game-controllers.json`. It ensures that the controller settings are accurately updated based on the backup file.
+
+This script restores controller configurations in the `Polycade AGS games.json` file using data from the `game-controllers.json` backup. It ensures accurate and consistent restoration of controller settings.
 
 ---
 
 ### `games-title-backup.py`
 
-This script is responsible for creating a backup of game titles.
-It reads the existing game titles from `Polycade AGS games.json`,
-and saves a copy of the titles to `game-titles.json`.
-The backup ensures that game title data can be updated and restored in case of accidental loss or corruption.
+This script creates a backup of game titles by reading the existing titles from the `Polycade AGS games.json` file and saving them to a `game-titles.json` file. The backup safeguards against accidental data loss or corruption.
 
 ---
 
 ### `games-title-update.py`
 
-This script is used to update game titles in `Polycade AGS games.json`.
-It allows modifications to existing game titles using the title-update key in `game-titles.json`.
-The script ensures that updates are applied correctly and consistently.
+This script updates game titles in the `Polycade AGS games.json` file. It uses the `title-update` key in the `game-titles.json` file to apply modifications, ensuring updates are applied correctly and consistently.
 
 ---
