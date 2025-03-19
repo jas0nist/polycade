@@ -26,7 +26,7 @@ This script restores controller configurations in `games.json` using the data st
 **Usage:**
 Use this script to revert to a previously backed-up state of controller configurations. Ensure that the `game-controllers.json` file is up-to-date and accurate before running this script.
 
-### games-title-backup.py
+### `games-title-backup.py`
 """
 This script is responsible for creating a backup of game titles.
 It reads the existing game titles from a source (e.g., a database or file),
@@ -42,7 +42,7 @@ Usage:
 Run this script periodically or before performing operations that might affect the game titles.
 """
 
-### games-title-update.py
+### `games-title-update.py`
 """
 This script is used to update game titles in the source system.
 It allows modifications to existing game titles.
