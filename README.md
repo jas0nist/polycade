@@ -2,7 +2,7 @@
 
 ## Script Descriptions
 
-### `games-wrapper.py`
+### `games-json.py`
 
 This script serves as a wrapper for managing and interacting with `Polycade AGS games.json` related functionalities.
 
